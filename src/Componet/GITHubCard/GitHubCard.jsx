@@ -25,7 +25,7 @@ import {
   import { Link } from "react-router-dom";
   import GoBack from "../GoBack";
   
-  let auth = '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'
+  let auth = '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'
 
   
   
