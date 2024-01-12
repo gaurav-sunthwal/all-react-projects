@@ -1,0 +1,23 @@
+body{
+    background: #171717 !important;
+    color: white !important;
+}
+
+
+.followInfo{
+    font-size: 20px !important;
+    margin: 9px !important;
+}
+
+.gitHubCard{
+    /* background-image: url("../assets/preview.jpg") !important; */
+}
+
+@media screen and (max-width: 800px) {
+  .serachInput{
+    width: 80% !important;
+  }
+  .gitImg{
+    width: 80% !important;
+  }
+}
