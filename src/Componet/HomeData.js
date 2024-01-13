@@ -48,6 +48,13 @@ const homeData = [
     link: "/qr-code",
     rating: 3,
   },
+  {
+    id: 7,  // Use a unique ID, incrementing from the last one
+    name: "Load Weather Data",
+    description: "a weather data app in react",
+    link: "/weatherApp",
+    rating: 3,
+  },
  
 ];
 

@@ -10,6 +10,7 @@ import LoadProduct from "./Componet/LodeMoreProduct/LoadProduct";
 import QRCodeGenrater from "./Componet/QRCode/QRCodeGenrater";
 import HaderScroller from "./Componet/HaderScroller/HaderScroller";
 import GitHubCard from "./Componet/GITHubCard/GitHubCard";
+import WeartherApp from "./Componet/WeatherApp/WeartherApp";
 function App() {
   return (
     <>
@@ -24,6 +25,7 @@ function App() {
           <Route path="/LoadMore" element={<LoadProduct/>} />
           <Route path="/qr-code" element={<QRCodeGenrater/>} />
           <Route path="/gitHubCard" element={<GitHubCard/>} />
+          <Route path="/weatherApp" element={<WeartherApp/>} />
         </Routes>
       </Router>
     </>
