@@ -6,17 +6,24 @@ import {
   Heading,
   Image,
   Input,
+  Select,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import haze from "./Img/haze.png";
+
 import sunny from "./Img/sunny.png";
 import rain from "./Img/rain.png";
 import Clouds from "./Img/Clouds.png";
-import "./Style.css"
+
+import { WiHumidity } from "react-icons/wi";
+import { GiWindsock } from "react-icons/gi";
+import "./Style.css";
+// import CityForm from "./CityForm";
+
 function WeartherApp() {
   const [inputValue, setinputValue] = useState("");
+  const [temp, setTemp] = useState("C");
   const [data, setData] = useState("");
   async function weatherData(city) {
     try {
@@ -32,10 +39,18 @@ function WeartherApp() {
     }
   }
 
-  async function handalClick() {
+  async function handalClick(e) {
+    e.preventDefault();
     weatherData(inputValue);
   }
-
+  function getCurrentDate() {
+    return new Date().toLocaleDateString("en-us", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+  }
   useEffect(() => {
     weatherData("pune");
   }, []);
@@ -46,46 +61,86 @@ function WeartherApp() {
           <Heading>Wearther App</Heading>
 
           <Card className="card" p={4} w={"50%"} bg={"#1f1f1f"} color={"white"}>
-            <HStack>
-              <Input
-                type="text"
-                placeholder="Search City!!"
-                value={inputValue}
-                onChange={(e) => {
-                  setinputValue(e.target.value);
-                }}
-              />
-              <Button onClick={handalClick}>Search</Button>
-            </HStack>
-
+            <form>
+              <HStack>
+                <Input
+                  type="text"
+                  placeholder="Search City!!"
+                  value={inputValue}
+                  autoFocus
+                  onChange={(e) => {
+                    setinputValue(e.target.value);
+                  }}
+                />
+                <Button type="submit" onClick={handalClick}>Search</Button>
+              </HStack>
+            </form>
             <VStack>
               {data && (
-                <VStack>
-                  <Image
-                    m={"auto"}
-                    p={4}
-                    display={"block"}
-                    w={"300px"}
-                    src={
-                      data.weather[0].main === "Rain"
-                        ? rain
-                        : data.weather[0].main === "Clouds"
-                        ? Clouds
-                        : data.weather[0].main === "Clear"
-                        ? sunny
-                        : haze
-                    }
-                  />
+                <Box>
+                  <Text position={"absolute"} right={0} p={3}>
+                    {getCurrentDate()}
+                  </Text>
+                  <VStack>
+                    <Image
+                      m={"auto"}
+                      p={4}
+                      display={"block"}
+                      w={"300px"}
+                      src={
+                        data.weather[0].main === "Rain"
+                          ? rain
+                          : data.weather[0].main === "Clouds"
+                          ? Clouds
+                          : data.weather[0].main === "Clear"
+                          ? sunny
+                          : Clouds
+                      }
+                    />
+                    <HStack>
+                      <Heading m={3}>
+                        {temp === "C"
+                          ? Math.floor(data.main.temp - 273.15) + " °C"
+                          : (Math.floor(data.main.temp - 273.15) * 9) / 5 +
+                            32 +
+                            " °F"}
+                      </Heading>
 
-
-                  <Heading>{Math.floor(data.main.temp - 273.15)}<sup>o</sup>C</Heading>
-
-                  <Heading>{data.name},{data.sys.country}</Heading>
-                </VStack>
+                      <Select
+                        w={"20%"}
+                        m={"auto"}
+                        display={"block"}
+                        value={temp}
+                        onChange={(e) => {
+                          setTemp(e.target.value);
+                        }}
+                      >
+                        <option value="C">°C</option>
+                        <option value="F">°F</option>
+                      </Select>
+                    </HStack>
+                    <Text>{data.weather[0].description}</Text>
+                    <Heading>
+                      {data.name},{data.sys.country}
+                    </Heading>
+                    <HStack>
+                      <HStack m={2} p={2} fontSize={30} alignItems={"center"}>
+                        <WiHumidity />
+                        <Text>: {data.main.humidity}</Text>
+                      </HStack>
+                      <HStack m={2} p={2} fontSize={30}>
+                        <GiWindsock />
+                        <Text>: {data.wind.speed}</Text>
+                      </HStack>
+                    </HStack>
+                  </VStack>
+                </Box>
               )}
             </VStack>
           </Card>
         </VStack>
+
+        {/* <CityForm/> */}
       </Box>
     </div>
   );

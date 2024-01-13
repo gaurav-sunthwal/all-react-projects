@@ -12,7 +12,7 @@ function HaderScroller() {
       document.documentElement.scrollHeight -
       document.documentElement.clientHeight;
     setScrollPercent((howMuchToScroll / height) * 100);
-    console.log((howMuchToScroll / height) * 100);
+    // console.log((howMuchToScroll / height) * 100);
   }
 
   useEffect(() => {
