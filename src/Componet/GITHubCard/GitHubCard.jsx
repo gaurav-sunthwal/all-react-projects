@@ -24,17 +24,13 @@ import {
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import GoBack from "../GoBack";
-import data from "../Wrapper/WrapperObject";
-// require('dotenv').config();
-
-// let auth = "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";
-
-// let auth = process.env.GITHUB_CARD;
 let auth = import.meta.env.VITE_GITHUB_CARD;
+let issues = 0;
 function GitHubCard() {
   const [inputValue, setInputValue] = useState("");
   const [useName, setUserName] = useState("gaurav-sunthwal");
   const [data, setData] = useState(null);
+  const [rapos, setRapos] = useState(null); 
 
   async function GitHubCardData() {
     try {
@@ -52,13 +48,27 @@ function GitHubCard() {
       console.log("Response message:", error.response?.message);
     }
   }
-
+  async function getInfo() {
+    let url = `https://api.github.com/users/${useName}/repos`;
+    try {
+      // console.log("here", auth);
+      let followerData = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${auth}`,
+        },
+      });
+      let followerresult = await followerData.json();
+      console.log(followerresult);
+      setRapos(followerresult);
+    } catch (error) {
+      console.error("Error fetching GitHub data:", error);
+    }
+  }
   useEffect(() => {
     GitHubCardData();
+    getInfo();
     // followingData();
   }, [useName]);
-
-
 
   function handleClick(e) {
     e.preventDefault();
@@ -74,9 +84,12 @@ function GitHubCard() {
         <Card bg={"#1f1f1f"} color={"white"}>
           <Box marginTop={13} p={3}>
             <VStack w={"100%"}>
-              <form style={{
-                width: "60%",
-              }}>
+              <form 
+                className="gitInput"
+                style={{
+                  width: "60%",
+                }}
+              >
                 <HStack>
                   <Input
                     type="text"
@@ -108,13 +121,14 @@ function GitHubCard() {
                     />
                     <Box textAlign={"center"}>
                       <HStack justifyContent={"center"}>
-                        <Link to={data.html_url}>
+                        <Link to={data.html_url} target="blank">
                           <Heading>{data.name}</Heading>
                         </Link>
 
                         {data.twitter_username !== null ? (
                           <Link
                             to={`https://twitter.com/${data.twitter_username}`}
+                            target="blank"
                           >
                             <Text>@{data.twitter_username}</Text>
                           </Link>
@@ -125,7 +139,7 @@ function GitHubCard() {
                       <Box>
                         <Text>{data.email}</Text>
                       </Box>
-                      <HStack justifyContent={"center"} m={2}>
+                      <HStack justifyContent={"center"} m={2} flexWrap={"wrap"}>
                         <GetInfoCard
                           userName={useName}
                           data={"followers"}
@@ -143,6 +157,12 @@ function GitHubCard() {
                           data={"repos"}
                           number={data.public_repos}
                           infoName={"Public Repos"}
+                        />
+                        <GetInfoCard
+                          userName={useName}
+                          data={"repos"}
+                          
+                          infoName={"Open issues rapos list"}
                         />
                       </HStack>
                     </Box>
@@ -199,15 +219,26 @@ function GetInfoCard(props) {
       <Popover>
         <PopoverTrigger>
           <Button colorScheme="blue">
-            {props.infoName} : {props.number}
+            {props.infoName} {props.infoName !== "Open issues rapos list" ? ": " + props.number : null}  
           </Button>
         </PopoverTrigger>
         <PopoverContent>
           <PopoverArrow />
           <PopoverCloseButton />
-          <PopoverHeader color={"black"}>{`Follow! >30 `}</PopoverHeader>
-          <PopoverBody color={"black"} overflow={"auto"} height={props.data !== "repos" ?   "30vh" : "60vh"}>
+          <PopoverHeader
+            color={"black"}
+          >{`${props.infoName}! >30 `}</PopoverHeader>
+          <PopoverBody
+            color={"black"}
+            overflow={"auto"}
+            height={
+              props.data !== "repos" || props.infoName === "Open issues rapos list"
+                ? "30vh"
+                : "60vh"
+            }
+          >
             {followers.map((item) => {
+              // let open_issues = item.open_issues
               return props.data !== "repos" ? (
                 <HStack
                   key={item.name}
@@ -219,6 +250,34 @@ function GetInfoCard(props) {
                   <Image borderRadius={"50%"} w={10} src={item.avatar_url} />
                   <Text>{item.login}</Text>
                 </HStack>
+              ) : props.infoName === "Open issues rapos list" ? (
+                <>
+                  {item.open_issues > 0 ? (
+                    <HStack w={"100%"}>
+                      <Accordion defaultIndex={[0]} allowMultiple w={"100%"}>
+                        <AccordionItem w={"100%"}>
+                          <h2>
+                            <AccordionButton w={"100%"}>
+                              <Box as="span" flex="1" textAlign="left">
+                                {item.name}
+                              </Box>
+                              <AccordionIcon />
+                            </AccordionButton>
+                          </h2>
+                          <AccordionPanel pb={4}>
+                            <Box textAlign={"start"}>
+                              <Link to={item.html_url} target="_blank">
+                                <Text>{item.full_name}</Text>
+                              </Link>
+                              <Text>Open Issues: {item.open_issues}</Text>
+                              <Text>visibility: {item.visibility}</Text>
+                            </Box>
+                          </AccordionPanel>
+                        </AccordionItem>
+                      </Accordion>
+                    </HStack>
+                  ) : null}
+                </>
               ) : (
                 <HStack w={"100%"}>
                   <Accordion defaultIndex={[0]} allowMultiple w={"100%"}>
@@ -233,7 +292,7 @@ function GetInfoCard(props) {
                       </h2>
                       <AccordionPanel pb={4}>
                         <Box textAlign={"start"}>
-                          <Link to={item.html_url}>
+                          <Link to={item.html_url} target="_blank">
                             <Text>{item.full_name}</Text>
                           </Link>
                           <Text>Open Issues: {item.open_issues}</Text>

@@ -20,4 +20,7 @@ body{
   .gitImg{
     width: 80% !important;
   }
+  .gitInput{
+    width: 100% !important;
+  }
 }
