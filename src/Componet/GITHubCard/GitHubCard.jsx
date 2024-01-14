@@ -26,11 +26,10 @@ import { Link } from "react-router-dom";
 import GoBack from "../GoBack";
 // require('dotenv').config();
 
-
 // let auth = "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";
 
 // let auth = process.env.GITHUB_CARD;
-let auth = import.meta.env.VITE_GITHUB_CARD
+let auth = import.meta.env.VITE_GITHUB_CARD;
 function GitHubCard() {
   const [inputValue, setInputValue] = useState("");
   const [useName, setUserName] = useState("gaurav-sunthwal");
@@ -58,11 +57,8 @@ function GitHubCard() {
     // followingData();
   }, [useName]);
 
-  function handleChange(e) {
-    setInputValue(e.target.value);
-  }
-
-  function handleClick() {
+  function handleClick(e) {
+    e.preventDefault();
     setUserName(inputValue);
   }
 
@@ -75,72 +71,86 @@ function GitHubCard() {
         <Card bg={"#1f1f1f"} color={"white"}>
           <Box marginTop={13} p={3}>
             <VStack w={"100%"}>
-              <HStack className="serachInput" w={"50%"}>
-                <Input
-                  value={inputValue}
-                  onChange={handleChange}
-                  autoFocus
-                  placeholder="Search GitHub UseName"
-                />
-                <Button onClick={handleClick} colorScheme="purple">
-                  Search
-                </Button>
-              </HStack>
+              <form
+                style={{
+                  width: "60%",
+                }}
+              >
+                <HStack>
+                  <Input
+                    type="text"
+                    placeholder="Search UserName!!"
+                    value={inputValue}
+                    autoFocus
+                    onChange={(e) => {
+                      setInputValue(e.target.value);
+                    }}
+                    w={"100%"}
+                  />
+                  <Button type="submit" onClick={handleClick}>
+                    Search
+                  </Button>
+                </HStack>
+              </form>
             </VStack>
           </Box>
           {useName !== null ? (
             data && (
               <>
-                <Box p={2}>
-                  <VStack>
-                    <Image
-                      className="gitImg"
-                      w={"25%"}
-                      borderRadius={"50%"}
-                      src={data.avatar_url}
-                    />
-                    <Box textAlign={"center"}>
-                      <HStack justifyContent={"center"}>
-                        <Link to={data.html_url}>
-                          <Heading>{data.name}</Heading>
-                        </Link>
-
-                        {data.twitter_username !== null ? (
-                          <Link
-                            to={`https://twitter.com/${data.twitter_username}`}
-                          >
-                            <Text>@{data.twitter_username}</Text>
+                {
+                  data.message !== "Not Found" ?
+                  <Box p={2}>
+                    <VStack>
+                      <Image
+                        className="gitImg"
+                        w={"25%"}
+                        borderRadius={"50%"}
+                        src={data.avatar_url}
+                      />
+                      <Box textAlign={"center"}>
+                        <HStack justifyContent={"center"}>
+                          <Link to={data.html_url}>
+                            <Heading>{data.name}</Heading>
                           </Link>
-                        ) : null}
-                      </HStack>
-                      <Text textAlign={"center"}>{data.company}</Text>
-                      <Text>{data.bio}</Text>
-                      <Box>
-                        <Text>{data.email}</Text>
+
+                          {data.twitter_username !== null ? (
+                            <Link
+                              to={`https://twitter.com/${data.twitter_username}`}
+                            >
+                              <Text>@{data.twitter_username}</Text>
+                            </Link>
+                          ) : null}
+                        </HStack>
+                        <Text textAlign={"center"}>{data.company}</Text>
+                        <Text>{data.bio}</Text>
+                        <Box>
+                          <Text>{data.email}</Text>
+                        </Box>
+                        <HStack justifyContent={"center"} m={2}>
+                          <GetInfoCard
+                            userName={useName}
+                            data={"followers"}
+                            number={data.followers}
+                            infoName={"Followers"}
+                          />
+                          <GetInfoCard
+                            userName={useName}
+                            data={"following"}
+                            number={data.following}
+                            infoName={"Following"}
+                          />
+                          <GetInfoCard
+                            userName={useName}
+                            data={"repos"}
+                            number={data.public_repos}
+                            infoName={"Public Repos"}
+                          />
+                        </HStack>
                       </Box>
-                      <HStack justifyContent={"center"} m={2}>
-                        <GetInfoCard
-                          userName={useName}
-                          data={"followers"}
-                          number={data.followers}
-                          infoName={"Followers"}
-                        />
-                        <GetInfoCard
-                          userName={useName}
-                          data={"following"}
-                          number={data.following}
-                          infoName={"Following"}
-                        />
-                        <GetInfoCard
-                          userName={useName}
-                          data={"repos"}
-                          number={data.public_repos}
-                          infoName={"Public Repos"}
-                        />
-                      </HStack>
-                    </Box>
-                  </VStack>
-                </Box>
+                    </VStack>
+                  </Box>
+                  : <h1>data.message</h1>
+                }
               </>
             )
           ) : (
@@ -199,11 +209,7 @@ function GetInfoCard(props) {
           <PopoverArrow />
           <PopoverCloseButton />
           <PopoverHeader color={"black"}>{`Follow! >30 `}</PopoverHeader>
-          <PopoverBody
-            color={"black"}
-            height={props.data === "repos" ? "auto" : "30vh"}
-            overflow={"auto"}
-          >
+          <PopoverBody color={"black"} overflow={"auto"}>
             {followers.map((item) => {
               return props.data !== "repos" ? (
                 <HStack
