@@ -42,7 +42,7 @@ function RecipesApp() {
                     data.data.recipes.map((item,index)=>{
                         return(
                             <Box m={2} key={item.publisher}>
-                                <RecipeCard img={item.image_url} title={item.title} handalClick={()=>handalFav()}/>
+                                <RecipeCard img={item.image_url} title={item.title} handalClick={()=>   handalFav()}/>
                             </Box>
                         )
                     })

@@ -1,3 +1,6 @@
+
+
+
 const homeData = [
   {
     id: 1,  // Use a unique ID, incrementing from the last one
