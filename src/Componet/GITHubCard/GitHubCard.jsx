@@ -30,7 +30,7 @@ function GitHubCard() {
   const [inputValue, setInputValue] = useState("");
   const [useName, setUserName] = useState("gaurav-sunthwal");
   const [data, setData] = useState(null);
-  const [rapos, setRapos] = useState(null); 
+  const [rapos, setRapos] = useState(null);
 
   async function GitHubCardData() {
     try {
@@ -74,7 +74,9 @@ function GitHubCard() {
     e.preventDefault();
     setUserName(inputValue);
   }
-
+  const updateUserName = (newUserName) => {
+    setUserName(newUserName);
+  };
   return (
     <div className="gitHubCard">
       <Box>
@@ -84,7 +86,7 @@ function GitHubCard() {
         <Card bg={"#1f1f1f"} color={"white"}>
           <Box marginTop={13} p={3}>
             <VStack w={"100%"}>
-              <form 
+              <form
                 className="gitInput"
                 style={{
                   width: "60%",
@@ -145,12 +147,14 @@ function GitHubCard() {
                           data={"followers"}
                           number={data.followers}
                           infoName={"Followers"}
+                          updateUserName={updateUserName}  
                         />
                         <GetInfoCard
                           userName={useName}
                           data={"following"}
                           number={data.following}
                           infoName={"Following"}
+                          updateUserName={updateUserName}  
                         />
                         <GetInfoCard
                           userName={useName}
@@ -161,7 +165,6 @@ function GitHubCard() {
                         <GetInfoCard
                           userName={useName}
                           data={"repos"}
-                          
                           infoName={"Open issues rapos list"}
                         />
                       </HStack>
@@ -213,13 +216,17 @@ function GetInfoCard(props) {
   function showUser(item) {
     setUserName(item.login);
     // alert(item.login)
+    props.updateUserName(item.login);
   }
   return (
     <Box>
       <Popover>
         <PopoverTrigger>
           <Button colorScheme="blue">
-            {props.infoName} {props.infoName !== "Open issues rapos list" ? ": " + props.number : null}  
+            {props.infoName}{" "}
+            {props.infoName !== "Open issues rapos list"
+              ? ": " + props.number
+              : null}
           </Button>
         </PopoverTrigger>
         <PopoverContent>
@@ -232,7 +239,8 @@ function GetInfoCard(props) {
             color={"black"}
             overflow={"auto"}
             height={
-              props.data !== "repos" || props.infoName === "Open issues rapos list"
+              props.data !== "repos" ||
+              props.infoName === "Open issues rapos list"
                 ? "30vh"
                 : "60vh"
             }
