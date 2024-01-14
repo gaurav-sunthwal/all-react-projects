@@ -24,6 +24,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import GoBack from "../GoBack";
+import data from "../Wrapper/WrapperObject";
 // require('dotenv').config();
 
 // let auth = "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";
@@ -57,6 +58,8 @@ function GitHubCard() {
     // followingData();
   }, [useName]);
 
+
+
   function handleClick(e) {
     e.preventDefault();
     setUserName(inputValue);
@@ -71,15 +74,13 @@ function GitHubCard() {
         <Card bg={"#1f1f1f"} color={"white"}>
           <Box marginTop={13} p={3}>
             <VStack w={"100%"}>
-              <form
-                style={{
-                  width: "60%",
-                }}
-              >
+              <form style={{
+                width: "60%",
+              }}>
                 <HStack>
                   <Input
                     type="text"
-                    placeholder="Search UserName!!"
+                    placeholder="Search City!!"
                     value={inputValue}
                     autoFocus
                     onChange={(e) => {
@@ -97,60 +98,56 @@ function GitHubCard() {
           {useName !== null ? (
             data && (
               <>
-                {
-                  data.message !== "Not Found" ?
-                  <Box p={2}>
-                    <VStack>
-                      <Image
-                        className="gitImg"
-                        w={"25%"}
-                        borderRadius={"50%"}
-                        src={data.avatar_url}
-                      />
-                      <Box textAlign={"center"}>
-                        <HStack justifyContent={"center"}>
-                          <Link to={data.html_url}>
-                            <Heading>{data.name}</Heading>
-                          </Link>
+                <Box p={2}>
+                  <VStack>
+                    <Image
+                      className="gitImg"
+                      w={"25%"}
+                      borderRadius={"50%"}
+                      src={data.avatar_url}
+                    />
+                    <Box textAlign={"center"}>
+                      <HStack justifyContent={"center"}>
+                        <Link to={data.html_url}>
+                          <Heading>{data.name}</Heading>
+                        </Link>
 
-                          {data.twitter_username !== null ? (
-                            <Link
-                              to={`https://twitter.com/${data.twitter_username}`}
-                            >
-                              <Text>@{data.twitter_username}</Text>
-                            </Link>
-                          ) : null}
-                        </HStack>
-                        <Text textAlign={"center"}>{data.company}</Text>
-                        <Text>{data.bio}</Text>
-                        <Box>
-                          <Text>{data.email}</Text>
-                        </Box>
-                        <HStack justifyContent={"center"} m={2}>
-                          <GetInfoCard
-                            userName={useName}
-                            data={"followers"}
-                            number={data.followers}
-                            infoName={"Followers"}
-                          />
-                          <GetInfoCard
-                            userName={useName}
-                            data={"following"}
-                            number={data.following}
-                            infoName={"Following"}
-                          />
-                          <GetInfoCard
-                            userName={useName}
-                            data={"repos"}
-                            number={data.public_repos}
-                            infoName={"Public Repos"}
-                          />
-                        </HStack>
+                        {data.twitter_username !== null ? (
+                          <Link
+                            to={`https://twitter.com/${data.twitter_username}`}
+                          >
+                            <Text>@{data.twitter_username}</Text>
+                          </Link>
+                        ) : null}
+                      </HStack>
+                      <Text textAlign={"center"}>{data.company}</Text>
+                      <Text>{data.bio}</Text>
+                      <Box>
+                        <Text>{data.email}</Text>
                       </Box>
-                    </VStack>
-                  </Box>
-                  : <h1>data.message</h1>
-                }
+                      <HStack justifyContent={"center"} m={2}>
+                        <GetInfoCard
+                          userName={useName}
+                          data={"followers"}
+                          number={data.followers}
+                          infoName={"Followers"}
+                        />
+                        <GetInfoCard
+                          userName={useName}
+                          data={"following"}
+                          number={data.following}
+                          infoName={"Following"}
+                        />
+                        <GetInfoCard
+                          userName={useName}
+                          data={"repos"}
+                          number={data.public_repos}
+                          infoName={"Public Repos"}
+                        />
+                      </HStack>
+                    </Box>
+                  </VStack>
+                </Box>
               </>
             )
           ) : (
@@ -209,7 +206,7 @@ function GetInfoCard(props) {
           <PopoverArrow />
           <PopoverCloseButton />
           <PopoverHeader color={"black"}>{`Follow! >30 `}</PopoverHeader>
-          <PopoverBody color={"black"} overflow={"auto"}>
+          <PopoverBody color={"black"} overflow={"auto"} height={props.data !== "repos" ?   "30vh" : "60vh"}>
             {followers.map((item) => {
               return props.data !== "repos" ? (
                 <HStack
