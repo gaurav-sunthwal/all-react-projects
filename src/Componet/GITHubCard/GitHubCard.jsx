@@ -80,7 +80,7 @@ function GitHubCard() {
                 <HStack>
                   <Input
                     type="text"
-                    placeholder="Search City!!"
+                    placeholder="Search UseName!!"
                     value={inputValue}
                     autoFocus
                     onChange={(e) => {
