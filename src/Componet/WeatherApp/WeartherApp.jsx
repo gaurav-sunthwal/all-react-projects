@@ -72,71 +72,80 @@ function WeartherApp() {
                     setinputValue(e.target.value);
                   }}
                 />
-                <Button type="submit" onClick={handalClick}>Search</Button>
+                <Button type="submit" onClick={handalClick}>
+                  Search
+                </Button>
               </HStack>
             </form>
-            <VStack>
-              {data && (
-                <Box>
-                  <Text position={"absolute"} right={0} p={3}>
-                    {getCurrentDate()}
-                  </Text>
-                  <VStack>
-                    <Image
-                      m={"auto"}
-                      p={4}
-                      display={"block"}
-                      w={"300px"}
-                      src={
-                        data.weather[0].main === "Rain"
-                          ? rain
-                          : data.weather[0].main === "Clouds"
-                          ? Clouds
-                          : data.weather[0].main === "Clear"
-                          ? sunny
-                          : Clouds
-                      }
-                    />
-                    <HStack>
-                      <Heading m={3}>
-                        {temp === "C"
-                          ? Math.floor(data.main.temp - 273.15) + " °C"
-                          : (Math.floor(data.main.temp - 273.15) * 9) / 5 +
-                            32 +
-                            " °F"}
-                      </Heading>
-
-                      <Select
-                        w={"20%"}
+            {
+              data.cod !== "404" ?
+              <VStack>
+                {data && (
+                  <Box>
+                    <Text position={"absolute"} right={0} p={3}>
+                      {getCurrentDate()}
+                    </Text>
+                    <VStack>
+                      <Image
                         m={"auto"}
+                        p={4}
                         display={"block"}
-                        value={temp}
-                        onChange={(e) => {
-                          setTemp(e.target.value);
-                        }}
-                      >
-                        <option value="C">°C</option>
-                        <option value="F">°F</option>
-                      </Select>
-                    </HStack>
-                    <Text>{data.weather[0].description}</Text>
-                    <Heading>
-                      {data.name},{data.sys.country}
-                    </Heading>
-                    <HStack>
-                      <HStack m={2} p={2} fontSize={30} alignItems={"center"}>
-                        <WiHumidity />
-                        <Text>: {data.main.humidity}</Text>
+                        w={"300px"}
+                        src={
+                          data.weather[0].main === "Rain"
+                            ? rain
+                            : data.weather[0].main === "Clouds"
+                            ? Clouds
+                            : data.weather[0].main === "Clear"
+                            ? sunny
+                            : Clouds
+                        }
+                      />
+                      <HStack>
+                        <Heading m={3}>
+                          {temp === "C"
+                            ? Math.floor(data.main.temp - 273.15) + " °C"
+                            : (Math.floor(data.main.temp - 273.15) * 9) / 5 +
+                              32 +
+                              " °F"}
+                        </Heading>
+
+                        <Select
+                          w={"20%"}
+                          m={"auto"}
+                          display={"block"}
+                          value={temp}
+                          onChange={(e) => {
+                            setTemp(e.target.value);
+                          }}
+                        >
+                          <option value="C">°C</option>
+                          <option value="F">°F</option>
+                        </Select>
                       </HStack>
-                      <HStack m={2} p={2} fontSize={30}>
-                        <GiWindsock />
-                        <Text>: {data.wind.speed}</Text>
+                      <Text>{data.weather[0].description}</Text>
+                      <Heading>
+                        {data.name},{data.sys.country}
+                      </Heading>
+                      <HStack>
+                        <HStack m={2} p={2} fontSize={30} alignItems={"center"}>
+                          <WiHumidity />
+                          <Text>: {data.main.humidity}</Text>
+                        </HStack>
+                        <HStack m={2} p={2} fontSize={30}>
+                          <GiWindsock />
+                          <Text>: {data.wind.speed}</Text>
+                        </HStack>
                       </HStack>
-                    </HStack>
-                  </VStack>
-                </Box>
-              )}
-            </VStack>
+                    </VStack>
+                  </Box>
+                )}
+              </VStack>
+              : <VStack h={"70vh"} justifyContent={"center"}>
+                    <Heading  textAlign={"center"}>Not Found!!....Search Diffrent</Heading>
+              </VStack>
+              
+            }
           </Card>
         </VStack>
 

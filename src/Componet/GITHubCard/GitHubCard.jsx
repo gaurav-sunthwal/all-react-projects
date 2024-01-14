@@ -25,7 +25,7 @@ import {
   import { Link } from "react-router-dom";
   import GoBack from "../GoBack";
   
-  let auth = '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'
+  let auth = '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'
 
   
   

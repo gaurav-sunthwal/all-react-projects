@@ -11,6 +11,7 @@ import QRCodeGenrater from "./Componet/QRCode/QRCodeGenrater";
 import HaderScroller from "./Componet/HaderScroller/HaderScroller";
 import GitHubCard from "./Componet/GITHubCard/GitHubCard";
 import WeartherApp from "./Componet/WeatherApp/WeartherApp";
+import RecipesApp from "./Componet/Recipes_App/RecipesApp";
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
           <Route path="/qr-code" element={<QRCodeGenrater/>} />
           <Route path="/gitHubCard" element={<GitHubCard/>} />
           <Route path="/weatherApp" element={<WeartherApp/>} />
+          <Route path="/recipeApp" element={<RecipesApp/>} />
         </Routes>
       </Router>
     </>
