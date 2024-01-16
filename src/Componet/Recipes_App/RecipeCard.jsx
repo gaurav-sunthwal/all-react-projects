@@ -34,7 +34,7 @@ function RecipeCard(props) {
               Buy now
             </Button>
             <Button variant="ghost" colorScheme="blue" onClick={props.handalClick}>
-              Add to fav
+              Add to Fav
             </Button>
           </ButtonGroup>
         </CardFooter>
