@@ -14,7 +14,7 @@ import {
 function RecipeCard(props) {
   return (
     <div>
-      <Card w={"300px"} h={"430px"}>
+      <Card w={"300px"} h={"auto"}>
         <CardBody>
           <Image
             src={props.img}
