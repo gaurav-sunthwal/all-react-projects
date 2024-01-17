@@ -1,8 +1,18 @@
+.foodOps :hover{
+   /* background-image: url("./Img/indian.jpg"); */
+
+  background-color: rgba(222, 184, 135, 0.716) !important;
+  border-radius: 100%;
+}
+
+
+
 @media screen and (max-width: 900px) {
   .RacipeItem{
     justify-content: normal !important;
   }
   .searchInput{
-    display: "none" !important;
+   width: 100% !important;
   }
+  
 }

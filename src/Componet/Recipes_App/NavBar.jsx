@@ -31,21 +31,22 @@ function NavBar(props) {
       >
         <HStack justifyContent={"space-between"} p={3}>
           <Box>
-            <Heading fontSize={"30px"}>Food Recipe</Heading>
+            <Heading fontSize={"30px"} color={"#469276"}>Foodis</Heading>
           </Box>
           
           <HStack cursor={"pointer"}>
             <Link to={"/recipeApp"}>
               <Text fontSize={"20px"}>Home</Text>
             </Link>
-            <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
-              Open
-            </Button>
+            <Heading fontSize={"20px"} ref={btnRef} colorScheme="teal" onClick={onOpen}>
+              Fav
+            </Heading>
             <Drawer
               isOpen={isOpen}
               placement="right"
               onClose={onClose}
               finalFocusRef={btnRef}
+              size={"xl"}
             >
               <DrawerOverlay />
               <DrawerContent>

@@ -67,12 +67,11 @@ function RecipesApp() {
               "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
           }}
         >
-          <HStack w={"80%"}>
+          <HStack w={"80%"} className="searchInput">
             <Input
               borderRadius={50}
               placeholder="Search Item"
               value={inputValue}
-              className="searchInput"
               onChange={(e) => {
                 setInputValue(e.target.value);
               }}
@@ -127,11 +126,14 @@ function RecipesApp() {
               overflow={"auto"}
               className="RacipeItem"
               justifyContent={"center"}
-              p={2}
+              p={3}
+              m={3}
             >
               <ExamplesItem img={amarican} name={"AMERICAN"} />
               <ExamplesItem img={indian} name={"Indian"} />
               <ExamplesItem img={maxicon} name={"AMERICAN"} />
+              <ExamplesItem img={amarican} name={"AMERICAN"} />
+              <ExamplesItem img={amarican} name={"AMERICAN"} />
               <ExamplesItem img={amarican} name={"AMERICAN"} />
               <ExamplesItem img={amarican} name={"AMERICAN"} />
             </HStack>
@@ -145,10 +147,10 @@ function RecipesApp() {
 function ExamplesItem(props) {
   return (
     <>
-      <Box p={1}>
+      <Box p={5}>
         <VStack
-          w={"150px"}
-          h={"150px"}
+          w={"130px"}
+          h={"130px"}
           borderRadius={"100%"}
           backgroundImage={props.img}
           backgroundRepeat={"none"}
@@ -156,8 +158,28 @@ function ExamplesItem(props) {
           alignItems={"center"}
           justifyContent={"center"}
           backdropBlur={"20px"}
+          style={{
+            scrollbarWidth:"0px"
+          }}
+          transition="transform 0.3s ease-in-out"
+          _hover={{
+            transform: "scale(1.2)",
+            cursor: "pointer",
+          }}
         >
-          <Heading fontSize={"15px"}>{props.name}</Heading>
+          <Box
+            textAlign={"center"}
+            w={"100%"}
+            h={"100%"}
+            alignItems={"center"}
+            borderRadius={"100%"}
+            backgroundColor="rgba(0, 0, 0, 0.5)"
+            className="foodOps"
+          >
+            <VStack h={"100%"} justifyContent={"center"}>
+              <Heading fontSize={"15px"}>{props.name}</Heading>
+            </VStack>
+          </Box>
         </VStack>
       </Box>
     </>
