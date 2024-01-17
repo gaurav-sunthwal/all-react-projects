@@ -18,8 +18,8 @@ import {
 import React from "react";
 import { Link } from "react-router-dom";
 function NavBar(props) {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const btnRef = React.useRef()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef();
   return (
     <div>
       <Card
@@ -31,14 +31,35 @@ function NavBar(props) {
       >
         <HStack justifyContent={"space-between"} p={3}>
           <Box>
-            <Heading fontSize={"30px"} color={"#469276"}>Foodis</Heading>
+            <Heading
+              fontSize={"30px"}
+              color={"#469276"}
+              onClick={() => {
+                props.Navsetinputvalue("");
+              }}
+              cursor={"pointer"}
+            >
+              Foodis
+            </Heading>
           </Box>
-          
+
           <HStack cursor={"pointer"}>
             <Link to={"/recipeApp"}>
-              <Text fontSize={"20px"}>Home</Text>
+              <Text
+                fontSize={"20px"}
+                onClick={() => {
+                  props.Navsetinputvalue("");
+                }}
+              >
+                Home
+              </Text>
             </Link>
-            <Heading fontSize={"20px"} ref={btnRef} colorScheme="teal" onClick={onOpen}>
+            <Heading
+              fontSize={"20px"}
+              ref={btnRef}
+              colorScheme="teal"
+              onClick={onOpen}
+            >
               Fav
             </Heading>
             <Drawer
@@ -50,12 +71,10 @@ function NavBar(props) {
             >
               <DrawerOverlay />
               <DrawerContent>
-                <DrawerCloseButton color={"black"}/>
+                <DrawerCloseButton color={"black"} />
                 <DrawerHeader>Create your account</DrawerHeader>
 
-                <DrawerBody color={"black"}>
-                    {props.data}
-                </DrawerBody>
+                <DrawerBody color={"black"}>{props.data}</DrawerBody>
 
                 <DrawerFooter>
                   <Button variant="outline" mr={3} onClick={onClose}>
