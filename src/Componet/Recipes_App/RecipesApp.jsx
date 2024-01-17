@@ -1,10 +1,14 @@
 import {
   Box,
   Button,
+  Card,
+  CardBody,
+  CardFooter,
   HStack,
   Heading,
   Image,
   Input,
+  Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -22,7 +26,7 @@ import maxicon from "./Img/maxicon.jpg";
 
 function RecipesApp() {
   const [data, setData] = useState("");
-  const [fav, setFav] = useState([1, 2, 34, 4]);
+  const [fav, setFav] = useState([]);
   const [inputValue, setInputValue] = useState("");
   async function allRecipe() {
     try {
@@ -42,9 +46,12 @@ function RecipesApp() {
   useEffect(() => {
     allRecipe();
   }, [inputValue]);
-  function handalFav(item, index) {
-    // alert(item.title)
-    console.log(index);
+  function handalFav(recipe, index) {
+    if (!fav.some((favRecipe) => favRecipe.id === recipe.id)) {
+      // Update favorites with the new recipe
+      setFav((prevFav) => [...prevFav, recipe]);
+      console.log(recipe);
+    }
   }
   return (
     <>
@@ -52,9 +59,40 @@ function RecipesApp() {
         <NavBar
           Navinputvalue={inputValue}
           Navsetinputvalue={setInputValue}
-          data={fav.map((item) => {
-            return <h1>{item}</h1>;
-          })}
+          data={fav.map((item, index) => (
+            <>
+              <Box p={3}>
+                <Card
+                  bgColor={"#1f1f1f"}
+                  color={"white"}
+                  direction={{ base: "column", sm: "row" }}
+                  overflow="hidden"
+                  variant="outline"
+                >
+                  <Image
+                    h={"200px"}
+                    w={"200px"}
+                    objectFit="cover"
+                    maxW={{ base: "100%", sm: "200px" }}
+                    src={item.image_url}
+                    alt={item.title}
+                  />
+
+                  <Stack>
+                    <CardBody>
+                      <Heading size="md">{item.title}</Heading>
+                    </CardBody>
+
+                    <CardFooter>
+                      <Button variant="solid" colorScheme="blue">
+                        See More
+                      </Button>
+                    </CardFooter>
+                  </Stack>
+                </Card>
+              </Box>
+            </>
+          ))}
         />
       </Box>
       <VStack w={"100%"}>
@@ -95,7 +133,7 @@ function RecipesApp() {
                           <RecipeCard
                             img={item.image_url}
                             title={item.title}
-                            handalClick={() => handalFav()}
+                            handalClick={() => handalFav(item)}
                           />
                         }
                       </Box>
@@ -129,13 +167,16 @@ function RecipesApp() {
               p={3}
               m={3}
             >
-              <ExamplesItem img={amarican} name={"AMERICAN"} />
-              <ExamplesItem img={indian} name={"Indian"} />
-              <ExamplesItem img={maxicon} name={"AMERICAN"} />
-              <ExamplesItem img={amarican} name={"AMERICAN"} />
-              <ExamplesItem img={amarican} name={"AMERICAN"} />
-              <ExamplesItem img={amarican} name={"AMERICAN"} />
-              <ExamplesItem img={amarican} name={"AMERICAN"} />
+              <ExamplesItem
+                img={amarican}
+                name={"AMERICAN"}
+                setInput={setInputValue}
+              />
+              <ExamplesItem
+                img={amarican}
+                name={"Indian"}
+                setInput={setInputValue}
+              />
             </HStack>
           </VStack>
         </>
@@ -147,7 +188,12 @@ function RecipesApp() {
 function ExamplesItem(props) {
   return (
     <>
-      <Box p={5}>
+      <Box
+        p={5}
+        onClick={() => {
+          props.setInput(props.name);
+        }}
+      >
         <VStack
           w={"130px"}
           h={"130px"}
@@ -159,7 +205,7 @@ function ExamplesItem(props) {
           justifyContent={"center"}
           backdropBlur={"20px"}
           style={{
-            scrollbarWidth:"0px"
+            scrollbarWidth: "0px",
           }}
           transition="transform 0.3s ease-in-out"
           _hover={{
@@ -177,7 +223,9 @@ function ExamplesItem(props) {
             className="foodOps"
           >
             <VStack h={"100%"} justifyContent={"center"}>
-              <Heading fontSize={"15px"}>{props.name}</Heading>
+              <Heading textTransform={"uppercase"} fontSize={"15px"}>
+                {props.name}
+              </Heading>
             </VStack>
           </Box>
         </VStack>
