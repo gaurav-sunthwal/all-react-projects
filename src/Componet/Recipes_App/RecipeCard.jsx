@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   ButtonGroup,
   Card,
@@ -17,6 +18,8 @@ function RecipeCard(props) {
       <Card w={"300px"} h={"auto"}>
         <CardBody>
           <Image
+            display={"block"}
+            m={"auto"}
             src={props.img}
             alt={props.title}
             borderRadius="lg"
@@ -33,7 +36,11 @@ function RecipeCard(props) {
             <Button variant="solid" colorScheme="blue">
               Buy now
             </Button>
-            <Button variant="ghost" colorScheme="blue" onClick={props.handalClick}>
+            <Button
+              variant="ghost"
+              colorScheme="blue"
+              onClick={props.handalClick}
+            >
               Add to Fav
             </Button>
           </ButtonGroup>

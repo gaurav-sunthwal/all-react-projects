@@ -71,7 +71,7 @@ function RecipesApp() {
                 >
                   <Image
                     h={"200px"}
-                    w={"200px"}
+                    w={"100%"}
                     objectFit="cover"
                     maxW={{ base: "100%", sm: "200px" }}
                     src={item.image_url}
@@ -110,9 +110,11 @@ function RecipesApp() {
               borderRadius={50}
               placeholder="Search Item"
               value={inputValue}
+              
               onChange={(e) => {
                 setInputValue(e.target.value);
               }}
+              
             />
             <Button borderRadius={"100%"} w={"45px"} fontSize={"50px"}>
               <FaSearch />
@@ -175,6 +177,26 @@ function RecipesApp() {
               <ExamplesItem
                 img={amarican}
                 name={"Indian"}
+                setInput={setInputValue}
+              />
+              <ExamplesItem
+                img={maxicon}
+                name={"MEXICAN"}
+                setInput={setInputValue}
+              />
+              <ExamplesItem
+                img={"http://forkify-api.herokuapp.com/images/italianpotroast2440.jpg"}
+                name={"italian"}
+                setInput={setInputValue}
+              />
+              <ExamplesItem
+                img={"https://media.istockphoto.com/id/605998748/photo/soul-food-1.jpg?s=612x612&w=0&k=20&c=FbcZayzoQCXj0x-eARB3wu-wiLQmvcVwbPV1fjo43G4="}
+                name={"SOUTHERN & SOUL FOODFRENCH"}
+                setInput={setInputValue}
+              />
+              <ExamplesItem
+                img={"https://forkify-api.herokuapp.com/images/AsianNoodleSalad1754.jpg"}
+                name={"ASIAN"}
                 setInput={setInputValue}
               />
             </HStack>
