@@ -23,14 +23,18 @@ import { FaSearch } from "react-icons/fa";
 import amarican from "./Img/amarican.jpg";
 import indian from "./Img/indian.jpg";
 import maxicon from "./Img/maxicon.jpg";
+import loadingImg from "./Img/loder.gif";
 
 function RecipesApp() {
   const [data, setData] = useState("");
   const [fav, setFav] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [loading, setLoading] = useState(false);
+
   async function allRecipe() {
     try {
       if (inputValue !== "") {
+        setLoading(true);
         let recipe = await fetch(
           `https://forkify-api.herokuapp.com/api/v2/recipes?search=${inputValue}&key=cc0f31f4-3989-4f88-af22-ce7c4016e12e`
         );
@@ -40,6 +44,8 @@ function RecipesApp() {
       }
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setLoading(false); // Set loading to false when the request is completed
     }
   }
 
@@ -110,11 +116,9 @@ function RecipesApp() {
               borderRadius={50}
               placeholder="Search Item"
               value={inputValue}
-              
               onChange={(e) => {
                 setInputValue(e.target.value);
               }}
-              
             />
             <Button borderRadius={"100%"} w={"45px"} fontSize={"50px"}>
               <FaSearch />
@@ -122,7 +126,11 @@ function RecipesApp() {
           </HStack>
         </VStack>
       </VStack>
-      {inputValue !== "" ? (
+      {loading ? (
+        <VStack justifyContent={"center"} h={"60vh"} w={"100%"}>
+          <Image w={"10%"} src={loadingImg} />
+        </VStack>
+      ) : inputValue !== "" ? (
         <Box>
           {data &&
             (data.data.recipes.length !== 0 ? (
@@ -146,6 +154,7 @@ function RecipesApp() {
             ) : (
               <>
                 <VStack justifyContent={"center"} h={"60vh"} w={"100%"}>
+                  <Image w={"10%"} src={loadingImg} />
                   <Heading p={2} textAlign={"certer"}>
                     {`Not Found!!......Search For your Fav Food like
                     "Pizza","Burger"`}
@@ -185,17 +194,23 @@ function RecipesApp() {
                 setInput={setInputValue}
               />
               <ExamplesItem
-                img={"http://forkify-api.herokuapp.com/images/italianpotroast2440.jpg"}
+                img={
+                  "http://forkify-api.herokuapp.com/images/italianpotroast2440.jpg"
+                }
                 name={"italian"}
                 setInput={setInputValue}
               />
               <ExamplesItem
-                img={"https://media.istockphoto.com/id/605998748/photo/soul-food-1.jpg?s=612x612&w=0&k=20&c=FbcZayzoQCXj0x-eARB3wu-wiLQmvcVwbPV1fjo43G4="}
+                img={
+                  "https://media.istockphoto.com/id/605998748/photo/soul-food-1.jpg?s=612x612&w=0&k=20&c=FbcZayzoQCXj0x-eARB3wu-wiLQmvcVwbPV1fjo43G4="
+                }
                 name={"SOUTHERN & SOUL FOODFRENCH"}
                 setInput={setInputValue}
               />
               <ExamplesItem
-                img={"https://forkify-api.herokuapp.com/images/AsianNoodleSalad1754.jpg"}
+                img={
+                  "https://forkify-api.herokuapp.com/images/AsianNoodleSalad1754.jpg"
+                }
                 name={"ASIAN"}
                 setInput={setInputValue}
               />
