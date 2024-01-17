@@ -91,7 +91,8 @@ function RecipesApp() {
               overflow={"auto"}
               className="RacipeItem"
               justifyContent={"center"}
-              p={4}
+              p={2}
+              
             >
               <ExamplesItem img={amarican} name={"AMERICAN"} />
               <ExamplesItem img={indian} name={"AMERICAN"} />
@@ -109,7 +110,7 @@ function RecipesApp() {
 function ExamplesItem(props) {
   return (
     <>
-      <Box p={2}>
+      <Box p={1}>
         <VStack
           w={"150px"}
           h={"150px"}
@@ -120,6 +121,7 @@ function ExamplesItem(props) {
           alignItems={"center"}
           justifyContent={"center"}
           backdropBlur={"20px"}
+         
         >
           <Heading fontSize={"15px"}>{props.name}</Heading>
         </VStack>
