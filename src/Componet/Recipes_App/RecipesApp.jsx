@@ -1,8 +1,19 @@
-import { Box, HStack, Heading, Image, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  HStack,
+  Heading,
+  Image,
+  Input,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import NavBar from "./NavBar";
 import { useEffect, useState } from "react";
 import RecipeCard from "./RecipeCard";
 import "./Racipe.css";
+
+import { FaSearch } from "react-icons/fa";
 // imgs
 
 import amarican from "./Img/amarican.jpg";
@@ -46,6 +57,32 @@ function RecipesApp() {
           })}
         />
       </Box>
+      <VStack w={"100%"}>
+        <VStack
+          justifyContent={"center"}
+          w={"100%"}
+          p={3}
+          css={{
+            boxShadow:
+              "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
+          }}
+        >
+          <HStack w={"80%"}>
+            <Input
+              borderRadius={50}
+              placeholder="Search Item"
+              value={inputValue}
+              className="searchInput"
+              onChange={(e) => {
+                setInputValue(e.target.value);
+              }}
+            />
+            <Button borderRadius={"100%"} w={"45px"} fontSize={"50px"}>
+              <FaSearch />
+            </Button>
+          </HStack>
+        </VStack>
+      </VStack>
       {inputValue !== "" ? (
         <Box>
           {data &&
@@ -69,11 +106,10 @@ function RecipesApp() {
               </>
             ) : (
               <>
-                <VStack justifyContent={"center"} h={"80vh"}>
-                  <Heading textAlign={"certer"}>
-                    {" "}
-                    Not Found!!......Search For your Fav Food like
-                    "Pizza","Burger"
+                <VStack justifyContent={"center"} h={"60vh"} w={"100%"}>
+                  <Heading p={2} textAlign={"certer"}>
+                    {`Not Found!!......Search For your Fav Food like
+                    "Pizza","Burger"`}
                   </Heading>
                 </VStack>
               </>
@@ -81,7 +117,7 @@ function RecipesApp() {
         </Box>
       ) : (
         <>
-          <VStack justifyContent={"center"} h={"80vh"}>
+          <VStack justifyContent={"center"} h={"60vh"}>
             <Text>PERSONALIZE YOUR EXPERIENCE</Text>
             <Heading textAlign={"center"}>
               What are your favorite cuisines?
@@ -92,10 +128,9 @@ function RecipesApp() {
               className="RacipeItem"
               justifyContent={"center"}
               p={2}
-              
             >
               <ExamplesItem img={amarican} name={"AMERICAN"} />
-              <ExamplesItem img={indian} name={"AMERICAN"} />
+              <ExamplesItem img={indian} name={"Indian"} />
               <ExamplesItem img={maxicon} name={"AMERICAN"} />
               <ExamplesItem img={amarican} name={"AMERICAN"} />
               <ExamplesItem img={amarican} name={"AMERICAN"} />
@@ -121,7 +156,6 @@ function ExamplesItem(props) {
           alignItems={"center"}
           justifyContent={"center"}
           backdropBlur={"20px"}
-         
         >
           <Heading fontSize={"15px"}>{props.name}</Heading>
         </VStack>

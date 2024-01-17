@@ -2,4 +2,7 @@
   .RacipeItem{
     justify-content: normal !important;
   }
+  .searchInput{
+    display: "none" !important;
+  }
 }
