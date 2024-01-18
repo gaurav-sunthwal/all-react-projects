@@ -43,7 +43,7 @@ function NavBar(props) {
             </Heading>
           </Box>
 
-          <HStack cursor={"pointer"}>
+          <HStack cursor={"pointer"} minW={"50%"} justifyContent={"space-evenly"}>
             <Link to={"/recipeApp"}>
               <Text
                 fontSize={"20px"}
@@ -52,6 +52,16 @@ function NavBar(props) {
                 }}
               >
                 Home
+              </Text>
+            </Link>
+            <Link to={"/recipeApp"}>
+              <Text
+                fontSize={"20px"}
+                onClick={() => {
+                  props.Navsetinputvalue("");
+                }}
+              >
+                About
               </Text>
             </Link>
             <Heading
@@ -63,6 +73,7 @@ function NavBar(props) {
               Fav
             </Heading>
             <Drawer
+              
               isOpen={isOpen}
               placement="right"
               onClose={onClose}

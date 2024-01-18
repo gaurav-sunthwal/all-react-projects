@@ -184,7 +184,7 @@ function RecipesApp() {
                 setInput={setInputValue}
               />
               <ExamplesItem
-                img={amarican}
+                img={indian}
                 name={"Indian"}
                 setInput={setInputValue}
               />
