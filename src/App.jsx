@@ -12,6 +12,7 @@ import HaderScroller from "./Componet/HaderScroller/HaderScroller";
 import GitHubCard from "./Componet/GITHubCard/GitHubCard";
 import WeartherApp from "./Componet/WeatherApp/WeartherApp";
 import RecipesApp from "./Componet/Recipes_App/RecipesApp";
+import HomePage from "./Componet/GoogleSearch_HomePage/HomePage";
 function App() {
   return (
     <>
@@ -28,6 +29,7 @@ function App() {
           <Route path="/gitHubCard" element={<GitHubCard/>} />
           <Route path="/weatherApp" element={<WeartherApp/>} />
           <Route path="/recipeApp" element={<RecipesApp/>} />
+          <Route path="/homePage" element={<HomePage/>} />
         </Routes>
       </Router>
     </>

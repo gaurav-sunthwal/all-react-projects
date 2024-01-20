@@ -63,6 +63,7 @@ function WeartherApp() {
           <Card className="card" p={4} w={"50%"} bg={"#1f1f1f"} color={"white"}>
             <form>
               <HStack>
+                {/* <div className="gcse-search"></div> */}
                 <Input
                   type="text"
                   placeholder="Search City!!"
@@ -77,8 +78,7 @@ function WeartherApp() {
                 </Button>
               </HStack>
             </form>
-            {
-              data.cod !== "404" ?
+            {data.cod !== "404" ? (
               <VStack>
                 {data && (
                   <Box>
@@ -141,11 +141,13 @@ function WeartherApp() {
                   </Box>
                 )}
               </VStack>
-              : <VStack h={"70vh"} justifyContent={"center"}>
-                    <Heading  textAlign={"center"}>Not Found!!....Search Diffrent</Heading>
+            ) : (
+              <VStack h={"70vh"} justifyContent={"center"}>
+                <Heading textAlign={"center"}>
+                  Not Found!!....Search Diffrent
+                </Heading>
               </VStack>
-              
-            }
+            )}
           </Card>
         </VStack>
 
