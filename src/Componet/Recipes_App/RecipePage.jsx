@@ -40,7 +40,7 @@ function RecipePage() {
   return (
     <div>
       <NavBar />
-
+      <Heading p={4} textAlign="center" size={"xl"}>Racipe </Heading>
       {item && (
         <>
           <HStack
