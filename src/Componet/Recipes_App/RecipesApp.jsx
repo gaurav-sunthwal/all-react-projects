@@ -13,7 +13,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import NavBar from "./NavBar";
-import { useEffect, useState } from "react";
+import { useHistory, useEffect, useState } from "react";
 import RecipeCard from "./RecipeCard";
 import "./Racipe.css";
 
@@ -24,6 +24,7 @@ import amarican from "./Img/amarican.jpg";
 import indian from "./Img/indian.jpg";
 import maxicon from "./Img/maxicon.jpg";
 import loadingImg from "./Img/loder.gif";
+import { useParams } from "react-router-dom";
 
 function RecipesApp() {
   const [data, setData] = useState("");
@@ -53,11 +54,21 @@ function RecipesApp() {
     allRecipe();
   }, [inputValue]);
   function handalFav(recipe, index) {
+    // const { id } = useParams();
     if (!fav.some((favRecipe) => favRecipe.id === recipe.id)) {
       // Update favorites with the new recipe
       setFav((prevFav) => [...prevFav, recipe]);
       console.log(recipe);
     }
+  }
+
+  // const history = useHistory();
+  function seeMore(item) {
+    // alert("Please select");
+    // const { id } = item.id;
+    // console.log(item.id);
+    // Use the history.push method to navigate to the URL with the recipe ID
+    // history.push(`/recipes/${id}`);
   }
   return (
     <>
@@ -90,7 +101,11 @@ function RecipesApp() {
                     </CardBody>
 
                     <CardFooter>
-                      <Button variant="solid" colorScheme="blue">
+                      <Button
+                        variant="solid"
+                        colorScheme="blue"
+                        
+                      >
                         See More
                       </Button>
                     </CardFooter>
@@ -143,6 +158,8 @@ function RecipesApp() {
                           <RecipeCard
                             img={item.image_url}
                             title={item.title}
+                            id={item.id}
+                            // handalSeeMore={()=>{seeMore(item)}}
                             handalClick={() => handalFav(item)}
                           />
                         }
@@ -259,7 +276,12 @@ function ExamplesItem(props) {
             backgroundColor="rgba(0, 0, 0, 0.5)"
             className="foodOps"
           >
-            <VStack h={"100%"} justifyContent={"center"}>
+            <VStack
+              className="text"
+              h={"100%"}
+              w={"100%"}
+              justifyContent={"center"}
+            >
               <Heading textTransform={"uppercase"} fontSize={"15px"}>
                 {props.name}
               </Heading>

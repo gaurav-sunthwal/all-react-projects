@@ -11,6 +11,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 function RecipeCard(props) {
   return (
@@ -33,9 +34,15 @@ function RecipeCard(props) {
         <Divider />
         <CardFooter>
           <ButtonGroup spacing="2">
-            <Button variant="solid" colorScheme="blue">
-              Buy now
-            </Button>
+            <Link to={`/recipeApp/${props.id}`}>
+              <Button
+                variant="solid"
+                colorScheme="blue"
+                onClick={props.handalSeeMore}
+              >
+                Buy now
+              </Button>
+            </Link>
             <Button
               variant="ghost"
               colorScheme="blue"

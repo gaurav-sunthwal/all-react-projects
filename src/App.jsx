@@ -13,6 +13,8 @@ import GitHubCard from "./Componet/GITHubCard/GitHubCard";
 import WeartherApp from "./Componet/WeatherApp/WeartherApp";
 import RecipesApp from "./Componet/Recipes_App/RecipesApp";
 import HomePage from "./Componet/GoogleSearch_HomePage/HomePage";
+import CapsOps from "./Componet/CapsOps/CapsOps";
+import RecipePage from "./Componet/Recipes_App/RecipePage";
 function App() {
   return (
     <>
@@ -29,6 +31,8 @@ function App() {
           <Route path="/gitHubCard" element={<GitHubCard/>} />
           <Route path="/weatherApp" element={<WeartherApp/>} />
           <Route path="/recipeApp" element={<RecipesApp/>} />
+          <Route path="/recipeApp/:id" element={<RecipePage/>} />
+          <Route path="/capsOps" element={<CapsOps/>} />
           <Route path="/homePage" element={<HomePage/>} />
         </Routes>
       </Router>

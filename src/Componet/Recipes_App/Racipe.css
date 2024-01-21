@@ -6,8 +6,16 @@
 }
 
 
+.text :hover{
+  background: none !important;
+}
+
+
 
 @media screen and (max-width: 900px) {
+  .RecipeImg{
+    width: 100% !important;
+  }
   .RacipeItem{
     justify-content: normal !important;
   }

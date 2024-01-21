@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaHeart } from "react-icons/fa";
 function NavBar(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
@@ -43,7 +44,11 @@ function NavBar(props) {
             </Heading>
           </Box>
 
-          <HStack cursor={"pointer"} minW={"50%"} justifyContent={"space-evenly"}>
+          <HStack
+            cursor={"pointer"}
+            minW={"50%"}
+            justifyContent={"space-between"}
+          >
             <Link to={"/recipeApp"}>
               <Text
                 fontSize={"20px"}
@@ -70,10 +75,13 @@ function NavBar(props) {
               colorScheme="teal"
               onClick={onOpen}
             >
-              Fav
+              <HStack>
+                <FaHeart />
+                
+                Fav
+              </HStack>
             </Heading>
             <Drawer
-              
               isOpen={isOpen}
               placement="right"
               onClose={onClose}

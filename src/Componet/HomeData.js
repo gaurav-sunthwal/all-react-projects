@@ -1,12 +1,16 @@
-
-
-
 const homeData = [
   {
     id: 1,  // Use a unique ID, incrementing from the last one
     name: "Racipes App",
     description: "a racipes app in react",
     link: "/recipeApp",
+    rating: 3,
+  },
+  {
+    id: 2,  // Use a unique ID, incrementing from the last one
+    name: "Caps Camparing App",
+    description: "camparing price of caps app in react",
+    link: "/capsOps",
     rating: 3,
   },
   {
