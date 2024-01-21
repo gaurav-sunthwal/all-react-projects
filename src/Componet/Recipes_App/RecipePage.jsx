@@ -22,7 +22,7 @@ import "./Racipe.css";
 function RecipePage() {
   const id = useParams();
   const [item, setItem] = useState();
-  console.log(id.id);
+  // console.log(id.id);
   async function RecipeData() {
     let res = await fetch(
       `https://forkify-api.herokuapp.com/api/v2/recipes/${id.id}`
@@ -35,7 +35,7 @@ function RecipePage() {
     return () => {
       RecipeData();
     };
-  }, [id.id]);
+  }, []);
 
   return (
     <div>
@@ -61,44 +61,9 @@ function RecipePage() {
             <VStack textAlign={"center"}>
               <Heading>{item.data.recipe.title}</Heading>
               <Box overflow={"auto"} w={"80%"} p={2}>
-                <TableContainer >
-                  <Table variant="simple">
-                    <TableCaption colorScheme="whiteAlpha">
-                      Imperial to metric conversion factors
-                    </TableCaption>
-                    <Thead>
-                      <Tr>
-                        <Th>To convert</Th>
-                        <Th>into</Th>
-                        <Th isNumeric>multiply by</Th>
-                      </Tr>
-                    </Thead>
-                    <Tbody colorScheme="whiteAlpha">
-                      <Tr>
-                        <Td>inches</Td>
-                        <Td>millimetres (mm)</Td>
-                        <Td isNumeric>25.4</Td>
-                      </Tr>
-                      <Tr>
-                        <Td>feet</Td>
-                        <Td>centimetres (cm)</Td>
-                        <Td isNumeric>30.48</Td>
-                      </Tr>
-                      <Tr>
-                        <Td>yards</Td>
-                        <Td>metres (m)</Td>
-                        <Td isNumeric>0.91444</Td>
-                      </Tr>
-                    </Tbody>
-                    <Tfoot>
-                      <Tr>
-                        <Th>To convert</Th>
-                        <Th>into</Th>
-                        <Th isNumeric>multiply by</Th>
-                      </Tr>
-                    </Tfoot>
-                  </Table>
-                </TableContainer>
+                <HStack>
+                  
+                </HStack>
               </Box>
             </VStack>
           </HStack>
