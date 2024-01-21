@@ -24,18 +24,22 @@ function RecipePage() {
   const [item, setItem] = useState();
   // console.log(id.id);
   async function RecipeData() {
-    let res = await fetch(
-      `https://forkify-api.herokuapp.com/api/v2/recipes/${id.id}`
-    );
-    let recipe = await res.json();
-    setItem(recipe);
-    console.log(recipe);
+    try {
+      let res = await fetch(
+        `https://forkify-api.herokuapp.com/api/v2/recipes/${id.id}`
+      );
+      let recipe = await res.json();
+      setItem(recipe);
+      console.log(recipe);
+    } catch (error) {
+      console.error("Error fetching recipe:", error);
+    }
   }
   useEffect(() => {
     return () => {
       RecipeData();
     };
-  }, []);
+  }, [id]);
 
   return (
     <div>
@@ -55,7 +59,8 @@ function RecipePage() {
                 m={"auto"}
                 w={"100%"}
                 p={4}
-                src={item.data.recipe.image_url}
+                src={item.data.recipe.image_url.replace("http://", "https://")}
+                alt={item.data.recipe.title}
               />
             </VStack>
             <VStack textAlign={"center"}>
