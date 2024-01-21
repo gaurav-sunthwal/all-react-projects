@@ -36,7 +36,7 @@ function NavBar(props) {
               fontSize={"30px"}
               color={"#469276"}
               onClick={() => {
-                props.Navsetinputvalue("");
+                props.Navsetinputvalue();
               }}
               cursor={"pointer"}
             >
