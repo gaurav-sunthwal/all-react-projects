@@ -15,6 +15,8 @@ import RecipesApp from "./Componet/Recipes_App/RecipesApp";
 import HomePage from "./Componet/GoogleSearch_HomePage/HomePage";
 import CapsOps from "./Componet/CapsOps/CapsOps";
 import RecipePage from "./Componet/Recipes_App/RecipePage";
+import MacClone from "./Componet/Mac-Clone/MacClone";
+import NewsApp from "./Componet/NewsApp/NewsApp";
 function App() {
   return (
     <>
@@ -34,6 +36,8 @@ function App() {
           <Route path="/recipeApp/:id" element={<RecipePage/>} />
           <Route path="/capsOps" element={<CapsOps/>} />
           <Route path="/homePage" element={<HomePage/>} />
+          <Route path="/Mac" element={<MacClone/>} />
+          <Route path="/News" element={<NewsApp/>} />
         </Routes>
       </Router>
     </>
