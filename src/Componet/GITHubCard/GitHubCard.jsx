@@ -23,7 +23,6 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import GoBack from "../GoBack";
 let auth = import.meta.env.VITE_GITHUB_CARD;
 let issues = 0;
 function GitHubCard() {
@@ -79,9 +78,7 @@ function GitHubCard() {
   };
   return (
     <div className="gitHubCard">
-      <Box>
-        <GoBack />
-      </Box>
+      
       <Box p={5}>
         <Card bg={"#1f1f1f"} color={"white"}>
           <Box marginTop={13} p={3}>

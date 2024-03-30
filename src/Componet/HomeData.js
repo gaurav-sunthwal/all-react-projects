@@ -1,6 +1,13 @@
 const homeData = [
   {
     id: 1,  // Use a unique ID, incrementing from the last one
+    name: "Check is your website is responsive",
+    description: "News App in rect js",
+    link: "/Checkresponsive",
+    rating: 3,
+  },
+  {
+    id: 1,  // Use a unique ID, incrementing from the last one
     name: "News App",
     description: "News App in rect js",
     link: "/News",

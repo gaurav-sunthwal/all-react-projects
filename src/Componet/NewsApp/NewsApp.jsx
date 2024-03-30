@@ -33,18 +33,18 @@ import { BiChat, BiLike, BiShare } from "react-icons/bi";
 //   },
 // };
 
-const options = {
-  method: "GET",
-  url: "https://news67.p.rapidapi.com/v2/topic-search",
-  params: {
-    languages: "en",
-    search: "business",
-  },
-  headers: {
-    "X-RapidAPI-Key": "9a183cd0cfmsh1e1828c3785c30fp1fd80fjsnc58e0db34d5f",
-    "X-RapidAPI-Host": "news67.p.rapidapi.com",
-  },
-};
+// const options = {
+//   method: "GET",
+//   url: "https://news67.p.rapidapi.com/v2/topic-search",
+//   params: {
+//     languages: "en",
+//     search: "business",
+//   },
+//   headers: {
+//     "X-RapidAPI-Key": "9a183cd0cfmsh1e1828c3785c30fp1fd80fjsnc58e0db34d5f",
+//     "X-RapidAPI-Host": "news67.p.rapidapi.com",
+//   },
+// };
 
 // const options = {
 //   method: "GET",
@@ -65,13 +65,19 @@ function NewsApp() {
     try {
       if (data === "") {
         setLoading(true);
-        const response = await axios.request(options);
-        console.log(response.data);
-        setData(response.data);
+        // const response = await axios.request(options);
+
+        const response = await fetch(
+          `https://newsdata.io/api/1/news?apikey=pub_37257a6289b4b480f81c96fba3fdf15d11637&q=business`
+        );
+        const result = await response.json();
+        console.log(result);
+        setData(result);
+        // pub_3725755a1ecd3073ebe1bc129a2d893257738
       }
     } catch (error) {
       console.error(error);
-      setLoading(true)
+      setLoading(true);
     } finally {
       setLoading(true);
     }
@@ -87,12 +93,21 @@ function NewsApp() {
     <div>
       <Box p={3}>
         <HStack flexWrap={"wrap"} justifyContent={"space-evenly"}>
-          {loding && loding === "true" ? (
-            <>
-              <Heading>Loding.....</Heading>
-            </>
+          {data !== "" ? (
+            data &&
+            data.results.map((item, i) => {
+              return(
+                <>
+                  <Box>
+
+                    <NewsCard description = {item.description} img={item.image_url} />
+
+                  </Box>
+                </>
+              )
+            })
           ) : (
-            <>{data && <NewsCard />}</>
+            <Heading>Loding...</Heading>
           )}
         </HStack>
       </Box>
@@ -102,7 +117,7 @@ function NewsApp() {
 
 function NewsCard(props) {
   return (
-    <Card maxW="md">
+    <Card maxW="md" h={"500px"} >
       <CardHeader>
         <Flex spacing="4">
           <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
@@ -122,17 +137,9 @@ function NewsCard(props) {
         </Flex>
       </CardHeader>
       <CardBody>
-        <Text>
-          With Chakra UI, I wanted to sync the speed of development with the
-          speed of design. I wanted the developer to be just as excited as the
-          designer to create a screen.
-        </Text>
+        <Text>{props.description}</Text>
       </CardBody>
-      <Image
-        objectFit="cover"
-        src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-        alt="Chakra UI"
-      />
+      <Image w={"100%"} h={"200px"} objectFit="cover" src={props.img} alt="Chakra UI" />
 
       <CardFooter
         justify="space-between"
