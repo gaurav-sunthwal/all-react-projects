@@ -19,6 +19,8 @@ import MacClone from "./Componet/Mac-Clone/MacClone";
 import NewsApp from "./Componet/NewsApp/NewsApp";
 import Checkresponsive from "./Componet/IamResponsive/checkresponsive";
 import Youtube from "./Componet/YoutubeClone/youtube";
+import AIProject from "./Componet/GenrativeAI/AIProject";
+import RandomValue from "./Componet/RandomCall/randomValue";
 function App() {
   return (
     <>
@@ -42,6 +44,8 @@ function App() {
           <Route path="/News" element={<NewsApp/>} />
           <Route path="/Checkresponsive" element={<Checkresponsive/>} />
           <Route path="/Youtube" element={<Youtube/>} />
+          <Route path="/AIGenrator" element={<AIProject/>} />
+          <Route path="/RandomValue" element={<RandomValue/>} />
         </Routes>
       </Router>
     </>

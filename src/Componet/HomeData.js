@@ -1,6 +1,20 @@
 const homeData = [
   {
     id: 1,  // Use a unique ID, incrementing from the last one
+    name: "Random Value ",
+    description: "Genrative AI Clone",
+    link: "/RandomValue",
+    rating: 3,
+  },
+  {
+    id: 1,  // Use a unique ID, incrementing from the last one
+    name: "AI Project ",
+    description: "Genrative AI Clone",
+    link: "/AIGenrator",
+    rating: 3,
+  },
+  {
+    id: 1,  // Use a unique ID, incrementing from the last one
     name: "Youtube",
     description: "Youtube Clone",
     link: "/Youtube",
