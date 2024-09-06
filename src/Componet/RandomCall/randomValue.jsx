@@ -17,7 +17,7 @@ const RandomValue = () => {
 
   const { colorMode, toggleColorMode } = useColorMode();
   const bg = useColorModeValue("gray.100", "gray.900");
-  const cardBg = useColorModeValue("white", "gray.800");
+  // const cardBg = useColorModeValue("white", "gray.800");
   const textColor = useColorModeValue("gray.800", "gray.100");
 
   const generateRandomValue = useCallback(() => ({
